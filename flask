@@ -1,0 +1,14 @@
+[install python-virtualenv and flask]
+$ sudo yum install python-virtualenv
+$ cd ~
+$ mkdir flask && cd flask
+$ virtualenv venv
+$ source venv/bin/activate
+$ pip install flask
+
+[exit virutal env use]
+$ deactivate
+
+[Install other packages in virtualenv]
+$ pip install pkg.name [--trusted-host pypi.douban.com] -i http://pypi.douban.com/simple
+

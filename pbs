@@ -1,0 +1,18 @@
+1. install torque in centos7
+
+$ sudo yum install torque-server.x86_64
+$ sudo yum install torque-mom.x86_64
+$ sudo yum install torque-scheduler.x86_64
+$ sudo yum install torque-client.x86_64
+
+
+2. configure queue for pbs server
+
+$ sudo qmgr -c 'create queue batch'
+$ sudo qmgr -c 'set queue batch queue_type = Execution'
+$ sudo qmgr -c 'set queue batch resources_default.nodes = 1'
+$ sudo qmgr -c 'set queue batch resources_default.walltime = 720:00:00'
+$ sudo qmgr -c 'set queue batch enabled = True'
+$ sudo qmgr -c 'set queue batch started = True'
+$ sudo qmgr -c 'set server default_queue = batch'
+$ sudo qmgr -c 'set server scheduling = True'

@@ -1,0 +1,41 @@
+1. simulate block device from file
+
+[generate 5G size file diskimage]
+# dd if=/dev/zero of=/diskimage bs=1M count=5120
+
+[check which loop num is free ]
+# cat /proc/mounts | grep /dev/loop 
+
+[if loop0 is not used]
+# losetup /dev/loop0 /diskimage 
+
+[generate file system in loop0 device]
+# mkfs.ext4 /dev/loop0 
+
+[mount up block device for file checking]
+# mount /dev/loop0 /mnt/diskpoint 
+
+[check device loop0 is mounted]
+# df -h
+
+
+2. extend file system
+
+$ sudo fdisk /dev/vda
+  p
+  m
+  n
+  p
+  \n\n\n
+  w
+$ sudo partprobe
+$ sudo mkfs.ext4 /dev/vda3
+$ sudo pvcreate /dev/vda3
+$ sudo pvdisplay
+$ sudo vgdisplay
+$ sudo vgextend centos /dev/vda3
+$ sudo vgdisplay
+$ sudo lvdisplay
+$ sudo lvextend -L +60G /dev/mapper/centos-root
+$ sudo resize2fs -f /dev/mapper/centos-root
+$ sudo xfs_growfs /dev/mapper/centos-root

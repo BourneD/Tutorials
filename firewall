@@ -1,0 +1,4 @@
+1. open port for centos7 firewalled
+
+$ firewall-cmd --get-active-zones
+$ sudo firewall-cmd --zone=public --add-port=80/tcp
